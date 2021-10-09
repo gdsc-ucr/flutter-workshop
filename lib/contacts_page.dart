@@ -10,23 +10,16 @@ class ContactsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Contactos'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            ContactItem(
-              name: contactList[0].firstName,
-              imageUrl: contactList[0].imageUrl,
-            ),
-            ContactItem(
-              name: contactList[1].firstName,
-              imageUrl: contactList[1].imageUrl,
-            ),
-            ContactItem(
-              name: contactList[2].firstName,
-              imageUrl: contactList[2].imageUrl,
-            ),
-          ],
-        ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          final contact = contactList[index];
+
+          return ContactItem(
+            name: '${contact.firstName} ${contact.lastName}',
+            imageUrl: contact.imageUrl,
+          );
+        },
+        itemCount: contactList.length,
       ),
     );
   }
