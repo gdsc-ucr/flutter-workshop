@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_workshop/constants/constants.dart';
+import 'package:flutter_workshop/constants/contact.dart';
+import 'package:flutter_workshop/contact_detail_page.dart';
 
 class ContactsPage extends StatelessWidget {
   const ContactsPage({Key? key}) : super(key: key);
@@ -14,10 +16,7 @@ class ContactsPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final contact = contactList[index];
 
-          return ContactItem(
-            name: '${contact.firstName} ${contact.lastName}',
-            imageUrl: contact.imageUrl,
-          );
+          return ContactItem(contact: contact);
         },
         itemCount: contactList.length,
       ),
@@ -28,20 +27,29 @@ class ContactsPage extends StatelessWidget {
 class ContactItem extends StatelessWidget {
   const ContactItem({
     Key? key,
-    required this.name,
-    required this.imageUrl,
+    required this.contact,
   }) : super(key: key);
 
-  final String name;
-  final String imageUrl;
+  final Contact contact;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        title: Text(name),
+        onTap: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) {
+                return ContactDetailPage(
+                  contact: contact,
+                );
+              },
+            ),
+          );
+        },
+        title: Text('${contact.firstName} ${contact.lastName}'),
         trailing: CircleAvatar(
-          backgroundImage: NetworkImage(imageUrl),
+          backgroundImage: NetworkImage(contact.imageUrl),
         ),
       ),
     );
