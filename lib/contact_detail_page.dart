@@ -19,9 +19,12 @@ class ContactDetailPage extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: NetworkImage(contact.imageUrl),
+            Hero(
+              tag: 'contact_image_${contact.id}',
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: NetworkImage(contact.imageUrl),
+              ),
             ),
             SizedBox(height: 10),
             Text('Nombre: ${contact.firstName} ${contact.lastName}'),

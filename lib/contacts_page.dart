@@ -48,8 +48,11 @@ class ContactItem extends StatelessWidget {
           );
         },
         title: Text('${contact.firstName} ${contact.lastName}'),
-        trailing: CircleAvatar(
-          backgroundImage: NetworkImage(contact.imageUrl),
+        trailing: Hero(
+          tag: 'contact_image_${contact.id}',
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(contact.imageUrl),
+          ),
         ),
       ),
     );
